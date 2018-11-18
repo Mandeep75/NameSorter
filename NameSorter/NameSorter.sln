@@ -3,19 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Name-Sorter", "Name-Sorter\Name-Sorter.csproj", "{C2563EB8-2625-4F98-8785-B71E2F5FE0FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter", "Name-Sorter\NameSorter.csproj", "{C2563EB8-2625-4F98-8785-B71E2F5FE0FB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Name-Sorter.IRepository", "Name-Sorter.IRepository\Name-Sorter.IRepository.csproj", "{71837293-013C-4727-917F-9605DF399DD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.Interfaces.IRepository", "Name-Sorter.IRepository\NameSorter.Interfaces.IRepository.csproj", "{71837293-013C-4727-917F-9605DF399DD0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Name-Sorter.Repository.Tests", "Name-Sorter.Repository.Tests\Name-Sorter.Repository.Tests.csproj", "{44958C47-9F06-4123-9848-48C6A697A760}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.Repository.Tests", "Name-Sorter.Repository.Tests\NameSorter.Repository.Tests.csproj", "{44958C47-9F06-4123-9848-48C6A697A760}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Name-Sorter.INameSorterService", "Name-Sorter.INameSorterService\Name-Sorter.INameSorterService.csproj", "{B8C7D0F6-1645-4C88-A306-EC3BC9397E85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.Interfaces.INameSorterService", "Name-Sorter.INameSorterService\NameSorter.Interfaces.INameSorterService.csproj", "{B8C7D0F6-1645-4C88-A306-EC3BC9397E85}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Name-Sorter.NameSorterService", "Name-Sorter.NameSorterService\Name-Sorter.NameSorterService.csproj", "{831894CE-41E3-4B30-9A68-7B0B81C5E11F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.NameSorterService", "Name-Sorter.NameSorterService\NameSorter.NameSorterService.csproj", "{831894CE-41E3-4B30-9A68-7B0B81C5E11F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.NameSorterService.Tests", "NameSorter.NameSorterService.Tests\NameSorter.NameSorterService.Tests.csproj", "{664F7656-24DC-44F8-B758-6C6400E9486F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Name-Sorter.Repository", "Name-Sorter.Repository\Name-Sorter.Repository.csproj", "{CC7B5B66-4D88-4308-92F6-40A7641465BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.Repository", "Name-Sorter.Repository\NameSorter.Repository.csproj", "{CC7B5B66-4D88-4308-92F6-40A7641465BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{C5823117-FA6D-4EE5-A59C-5276E4DAA09B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{365DFC4A-56B6-4B32-9775-2D2A1D7F9279}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implementation", "Implementation", "{80837D0F-073A-46C9-A6B5-BCDAF3F8A7C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Tests", "Unit Tests", "{7B02646C-F96C-4B58-B20A-AC25D17C13CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +62,15 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C2563EB8-2625-4F98-8785-B71E2F5FE0FB} = {C5823117-FA6D-4EE5-A59C-5276E4DAA09B}
+		{71837293-013C-4727-917F-9605DF399DD0} = {365DFC4A-56B6-4B32-9775-2D2A1D7F9279}
+		{44958C47-9F06-4123-9848-48C6A697A760} = {7B02646C-F96C-4B58-B20A-AC25D17C13CB}
+		{B8C7D0F6-1645-4C88-A306-EC3BC9397E85} = {365DFC4A-56B6-4B32-9775-2D2A1D7F9279}
+		{831894CE-41E3-4B30-9A68-7B0B81C5E11F} = {80837D0F-073A-46C9-A6B5-BCDAF3F8A7C4}
+		{664F7656-24DC-44F8-B758-6C6400E9486F} = {7B02646C-F96C-4B58-B20A-AC25D17C13CB}
+		{CC7B5B66-4D88-4308-92F6-40A7641465BC} = {80837D0F-073A-46C9-A6B5-BCDAF3F8A7C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E345B10-9851-470E-A653-D3FAF99A0D5C}

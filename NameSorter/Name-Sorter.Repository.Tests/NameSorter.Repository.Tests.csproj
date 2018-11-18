@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Name-Sorter.Repository\Name-Sorter.Repository.csproj" />
+    <ProjectReference Include="..\Name-Sorter.Repository\NameSorter.Repository.csproj" />
   </ItemGroup>
 
 </Project>

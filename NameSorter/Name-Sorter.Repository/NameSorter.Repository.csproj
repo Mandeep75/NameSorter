@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Name-Sorter.IRepository\Name-Sorter.IRepository.csproj" />
+    <ProjectReference Include="..\Name-Sorter.IRepository\NameSorter.Interfaces.IRepository.csproj" />
   </ItemGroup>
 
 </Project>

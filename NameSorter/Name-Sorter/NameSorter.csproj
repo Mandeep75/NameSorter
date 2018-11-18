@@ -15,10 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Name-Sorter.INameSorterService\Name-Sorter.INameSorterService.csproj" />
-    <ProjectReference Include="..\Name-Sorter.IRepository\Name-Sorter.IRepository.csproj" />
-    <ProjectReference Include="..\Name-Sorter.NameSorterService\Name-Sorter.NameSorterService.csproj" />
-    <ProjectReference Include="..\Name-Sorter.Repository\Name-Sorter.Repository.csproj" />
+    <ProjectReference Include="..\Name-Sorter.INameSorterService\NameSorter.Interfaces.INameSorterService.csproj" />
+    <ProjectReference Include="..\Name-Sorter.IRepository\NameSorter.Interfaces.IRepository.csproj" />
+    <ProjectReference Include="..\Name-Sorter.NameSorterService\NameSorter.NameSorterService.csproj" />
+    <ProjectReference Include="..\Name-Sorter.Repository\NameSorter.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>
