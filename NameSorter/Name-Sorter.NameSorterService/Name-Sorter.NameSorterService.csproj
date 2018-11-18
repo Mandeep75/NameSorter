@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RootNamespace>Name_Sorter.NameSorterService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Name-Sorter.INameSorterService\Name-Sorter.INameSorterService.csproj" />
+    <ProjectReference Include="..\Name-Sorter.IRepository\Name-Sorter.IRepository.csproj" />
+  </ItemGroup>
+
+</Project>
