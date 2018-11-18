@@ -9,6 +9,6 @@ Dependency Injection- Service layer depends only on Repository interface.Depende
 <h3>Solution Adheres to TDD principles. .</h3> 
 App is designed as TDD, and all unit tests names follow TDD conventions .
 
-<h3>UI Responsiveness<h3>
+<h3>UI Responsiveness</h3>
 
 To ensure that When testing with large file,UI stays responsive, data is fetched in background thread.
