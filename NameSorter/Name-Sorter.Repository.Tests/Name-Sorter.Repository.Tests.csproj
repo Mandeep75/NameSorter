@@ -14,12 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Name-Sorter.Repository\Name-Sorter.Repository.csproj" />
+    <Folder Include="DataSource\" />
+    <Folder Include="Output\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataSource\" />
-    <Folder Include="Output\" />
+    <ProjectReference Include="..\Name-Sorter.Repository\Name-Sorter.Repository.csproj" />
   </ItemGroup>
 
 </Project>
