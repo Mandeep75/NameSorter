@@ -1,6 +1,10 @@
 # NameSorter
 Assessment task
 The solution is a .Net Core Console 3 tier app along with Unit Tests. Solution  demonstrates:
+Kindly set nameSorter.csproj under APP folder in solution as the startup project.
+
+The sorted names output file will be ceated under  App/Output and any Logs under App/Logs
+
 <h3>Solution Adheres to SOLID principles. .</h3> 
 Single Responibility: e.g Mapper class is only concerned with mapping between string and name dto and vive versa, 
 Liskov substitution- BusinessServices are dependent only on the Repository interface, which can easily by substituted by by a databasae reader instaed of a file reader  presently..
