@@ -49,7 +49,17 @@ namespace Name_Sorter.Repository
 
         public void SaveNames(List<string> names)
         {
-           File.WriteAllLines(Destination, names);
+            var destinationFilePath = Destination + "\\sorted-names-list.txt" ;
+            var destinationFileInfo = new FileInfo(destinationFilePath);
+
+            var destinationDirInfo = new DirectoryInfo(destinationFileInfo.DirectoryName);
+            if (!destinationDirInfo.Exists) destinationDirInfo.Create();
+            if (!destinationFileInfo.Exists)
+            {
+                var stream =destinationFileInfo.Create();
+                stream.Close();                
+            }
+            File.WriteAllLines(destinationFilePath, names);
         }
     }
 }
