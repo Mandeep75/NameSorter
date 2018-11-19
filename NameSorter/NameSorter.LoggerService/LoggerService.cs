@@ -1,21 +1,19 @@
-﻿using NameSorter.Interfaces.INameSorterServices;
+﻿using NameSorter.Interfaces.ILogger;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
-namespace Name_Sorter.NamesService
+namespace NameSorter.LoggerService
 {
     public class LoggerService : ILoggerService
     {
-        public string LogFilePath { get; set ; }
+        public string LogFilePath { get; set; }
 
         public void WriteLog(string strLog)
         {
             StreamWriter log;
             FileStream fileStream = null;
             DirectoryInfo logDirInfo = null;
-            FileInfo logFileInfo;            
+            FileInfo logFileInfo;
             var logFile = LogFilePath + "\\Log-" + System.DateTime.Today.ToString("MM-dd-yyyy") + "." + "txt";
             logFileInfo = new FileInfo(logFile);
             logDirInfo = new DirectoryInfo(logFileInfo.DirectoryName);

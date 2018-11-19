@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Configuration;
+using NameSorter.Interfaces.ILogger;
+
 namespace Name_Sorter.Repository
 {
     public class NamesRepository : INamesRepository
@@ -11,13 +13,22 @@ namespace Name_Sorter.Repository
         public string Destination { get; set; }
 
         private List<string> mCache;
+        private ILoggerService loggerService;
+
+        public NamesRepository(ILoggerService _loggerService)
+        {
+            loggerService = _loggerService;
+        }
 
         public List<string> RetrieveNames()
         {
             //caching names as IO is expensive and this api gets called multiple times ie ,
             //once for validating data and then for sorting data
             if (mCache != null)
+            {
+                loggerService.WriteLog("Names Retrieved from Cache");
                 return mCache;
+            }
 
             mCache = new List<string>();
            
@@ -25,23 +36,15 @@ namespace Name_Sorter.Repository
             using (var reader = new StreamReader(DataSource))
             {
                 while (!reader.EndOfStream)
-                {
+                {                   
                    
-                    try
-                    {
                         var line = reader.ReadLine();
-                        mCache.Add(line);
-
-                    }
-                    catch 
-                    {
-                        //Utilities.Utilities.WriteLog(string.Format("Invalid Data. TeamName: {0}, For : {1} , Against : {2}", values[0], values[5], values[7]));
-                        //Utilities.Utilities.WriteLog(ex.Message);
-                    }
+                        mCache.Add(line);                  
 
 
                 }
             }
+            loggerService.WriteLog("Names Retrieved fromfile");
             return mCache;
         }
 
@@ -60,6 +63,7 @@ namespace Name_Sorter.Repository
                 stream.Close();                
             }
             File.WriteAllLines(destinationFilePath, names);
+            loggerService.WriteLog(string.Format("{0} Names Saved to {1} ",names.Count, destinationFilePath));
         }
     }
 }

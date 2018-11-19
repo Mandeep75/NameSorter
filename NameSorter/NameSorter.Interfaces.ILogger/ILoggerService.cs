@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace NameSorter.Interfaces.INameSorterServices
+namespace NameSorter.Interfaces.ILogger
 {
     public interface ILoggerService
     {

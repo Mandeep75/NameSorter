@@ -15,3 +15,7 @@ NameSorter/Name-Sorter.Repository.Tests/bin/
 NameSorter/.vs/
 NameSorter/Name-Sorter.Repository/bin/
 NameSorter/Name-Sorter.Repository/obj/
+NameSorter/NameSorter.Interfaces.ILogger/bin/
+NameSorter/NameSorter.Interfaces.ILogger/obj/
+NameSorter/NameSorter.LoggerService/bin/
+NameSorter/NameSorter.LoggerService/obj/

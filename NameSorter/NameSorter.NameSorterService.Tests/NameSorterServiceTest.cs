@@ -4,8 +4,7 @@ using NameSorter.Interfaces.INameSorterServices;
 using Name_Sorter.NamesService;
 using System.Collections.Generic;
 using Name_Sorter.IRepository;
-
-
+using NameSorter.Interfaces.ILogger;
 
 namespace NameSorter.NamesService.Tests
 {

@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using NameSorter.Interfaces.ILogger;
+using NameSorter.LoggerService;
 
 namespace Name_Sorter
 {
@@ -18,7 +20,7 @@ namespace Name_Sorter
             var serviceProvider = new ServiceCollection()            
             .AddSingleton<INamesRepository, NamesRepository>()
             .AddSingleton<INameSorterServices.INameSorterService, namesService.NameSorterService>()
-            .AddSingleton<INameSorterServices.ILoggerService, namesService.LoggerService>()
+            .AddSingleton<ILoggerService, LoggerService>()
             .BuildServiceProvider();
            
 
@@ -39,7 +41,7 @@ namespace Name_Sorter
 
             //set Log file location
 
-            var loggerService = serviceProvider.GetService<INameSorterServices.ILoggerService>();
+            var loggerService = serviceProvider.GetService<ILoggerService>();
             loggerService.LogFilePath= config["AppSettings:LogFilePath"];
 
             var bar = serviceProvider.GetService<INameSorterServices.INameSorterService>();
@@ -47,63 +49,80 @@ namespace Name_Sorter
             Console.WriteLine("Begining sort.......");
             Console.WriteLine();
 
-            var sortedNames =  GetSortedNames(bar);
+            var sortedNames =  GetSortedNames(bar,loggerService);
 
             var result = sortedNames.Result;
             Console.WriteLine();
             Console.WriteLine(string.Format("Displaying Results in Main Thread id :{0}", Thread.CurrentThread.ManagedThreadId));
             Console.WriteLine();
-            if (!result.IsUnsortedDataValid)
+            if (result.ExceptionFromSorting!=null)
             {
-                if (result.illegalName==null|| result.illegalName.Length==0)
+                Console.WriteLine(string.Format("Sort operation failed. Detailed exception: {0} {1}", Environment.NewLine, result.ExceptionFromSorting.ToString()));
+
+            }
+            else  if (!result.IsUnsortedDataValid)
+            {
+                if (result.IllegalName==null|| result.IllegalName.Length==0)
                     Console.WriteLine("Invalid Name in Data.A person must have at least 1 given name");
                 else
-                    Console.WriteLine(string.Format("Invalid Name in Data. A person cant have more than 3 given names. Invalid Name: {0}", result.illegalName));
+                    Console.WriteLine(string.Format("Invalid Name in Data. A person cant have more than 3 given names. Invalid Name: {0}", result.IllegalName));
             }
             else
             {
-                foreach (var sortedName in result.sortedNames)
+                foreach (var sortedName in result.SortedNames)
                 {
                     Console.WriteLine(sortedName);
                 }
 
             }           
             Console.ReadLine();
-            Console.WriteLine("All done!");
+            
         }
 
-        private static async Task<SortResult>   GetSortedNames(INameSorterServices.INameSorterService bar)
+        private static async Task<SortResult>   GetSortedNames(INameSorterServices.INameSorterService bar,ILoggerService loggerService)
         {
             var backgroundTask = Task.Run(() =>            
-            ValidateandGetSortedNames(bar));
+            ValidateandGetSortedNames(bar,loggerService));
             //bar.GetSortedNames());
             // do other work
             var sortResult = await backgroundTask;
             return sortResult;
         }
 
-        private static SortResult ValidateandGetSortedNames(INameSorterServices.INameSorterService bar)
+        private static SortResult ValidateandGetSortedNames(INameSorterServices.INameSorterService bar, ILoggerService loggerService)
         {
-            string illegalName;
             var result = new SortResult();
-            Console.WriteLine(string.Format("Running sort Op in Background Thread , id {0}", Thread.CurrentThread.ManagedThreadId));
-            bool isDataValid=bar.validateNames(out illegalName);
-            if (!isDataValid)
+            try
             {
-                result.IsUnsortedDataValid = false;
-                result.illegalName = illegalName;
+                string illegalName;
+                
+                Console.WriteLine(string.Format("Running sort Op in Background Thread , id {0}", Thread.CurrentThread.ManagedThreadId));
+                bool isDataValid = bar.validateNames(out illegalName);
+                if (!isDataValid)
+                {
+                    result.IsUnsortedDataValid = false;
+                    result.IllegalName = illegalName;
+                    return result;
+                }
+                result.SortedNames = bar.GetSortedNames();
+                result.IsUnsortedDataValid = true;
                 return result;
-            }            
-            result.sortedNames = bar.GetSortedNames();
-            result.IsUnsortedDataValid = true;
-            return result;
+            }
+            catch(Exception ex)
+            {
+                result.ExceptionFromSorting = ex;
+                loggerService.WriteLog(string.Format("Sort operation failed. Detailed exception: {0} {1}",Environment.NewLine, ex.ToString()));                
+                return result;
+
+            }
         }
     }
 
     class SortResult
     {
         internal bool IsUnsortedDataValid { get; set;}
-        internal string illegalName { get; set; }
-        internal List<string> sortedNames { get; set; }
+        internal string IllegalName { get; set; }
+        internal List<string> SortedNames { get; set; }
+        internal Exception ExceptionFromSorting { get; set; }
     }
 }

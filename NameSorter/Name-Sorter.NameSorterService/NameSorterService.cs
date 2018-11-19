@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using INameSorterServices=NameSorter.Interfaces.INameSorterServices;
 using Name_Sorter.IRepository;
 using System.Linq;
+using NameSorter.Interfaces.ILogger;
 
 namespace Name_Sorter.NamesService
 {
@@ -10,8 +11,8 @@ namespace Name_Sorter.NamesService
     {
         
         private INamesRepository namesRepository;
-        private INameSorterServices.ILoggerService loggerService;
-        public NameSorterService(INamesRepository _repository, INameSorterServices.ILoggerService _loggerService)
+        private ILoggerService loggerService;
+        public NameSorterService(INamesRepository _repository, ILoggerService _loggerService)
         {
             namesRepository = _repository;
             loggerService = _loggerService;

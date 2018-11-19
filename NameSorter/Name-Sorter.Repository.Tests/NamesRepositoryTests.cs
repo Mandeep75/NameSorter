@@ -1,4 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using NameSorter.Interfaces.ILogger;
 using System.Collections.Generic;
 using System.IO;
 
@@ -10,7 +12,8 @@ namespace Name_Sorter.Repository.Tests
         [TestMethod]
         public void RetrieveNames_ValidTextFile_ReturnsListofStrings()
         {
-            var namesRepository = new NamesRepository();
+            var loggerMock = new Mock<ILoggerService>();
+            var namesRepository = new NamesRepository(loggerMock.Object);
 
             string path = Directory.GetCurrentDirectory();
             namesRepository.DataSource = @".\..\..\..\DataSource\unsorted-names-list.txt";
@@ -22,7 +25,8 @@ namespace Name_Sorter.Repository.Tests
         [TestMethod]
         public void SaveNames_ValidListOfStrings_SavesStringsToFile()
         {
-            var namesRepository = new NamesRepository();
+            var loggerMock = new Mock<ILoggerService>();
+            var namesRepository = new NamesRepository(loggerMock.Object);
 
             string path = Directory.GetCurrentDirectory();
 
