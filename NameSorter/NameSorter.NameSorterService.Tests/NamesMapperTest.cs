@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using Name_Sorter.INamesService;
+using NameSorter.Interfaces.INameSorterServices;
 using Name_Sorter.NamesService;
 using System.Collections.Generic;
 
@@ -26,7 +26,7 @@ namespace NameSorter.NamesService.Tests
                 "Mikayla Lopez",
                 "Frankie Conner Ritter"
             };
-            var mapper = NamesMapper.Instance;
+            var mapper = NamesMapperService.Instance;
             var names=mapper.Map(namestrings);
             Assert.AreEqual(namestrings.Count, names.Count);
 
@@ -41,7 +41,7 @@ namespace NameSorter.NamesService.Tests
                 "Hunter  Uriah Mathew  Clarke  ",
                 
             };
-            var mapper = NamesMapper.Instance;
+            var mapper = NamesMapperService.Instance;
             var names = mapper.Map(namestrings);
             Assert.AreEqual(names[0].GivenName_1, "Hunter");
             Assert.AreEqual(names[0].GivenName_2, "Uriah");
@@ -62,7 +62,7 @@ namespace NameSorter.NamesService.Tests
                 new Name {GivenName_1="Hunter",GivenName_2="Uriah",GivenName_3="Mathew",LastName="Clarke"},
                 
             };
-            var mapper = NamesMapper.Instance;
+            var mapper = NamesMapperService.Instance;
             var namestrings = mapper.Map(names);
             Assert.AreEqual(names.Count,namestrings.Count );
             Assert.AreEqual(namestrings[0], "Janet Parsons");

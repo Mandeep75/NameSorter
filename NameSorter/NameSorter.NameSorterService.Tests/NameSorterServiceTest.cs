@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Name_Sorter.INamesService;
+using NameSorter.Interfaces.INameSorterServices;
 using Name_Sorter.NamesService;
 using System.Collections.Generic;
 using Name_Sorter.IRepository;
@@ -29,8 +29,8 @@ namespace NameSorter.NamesService.Tests
                 "Mikayla Lopez",
                 "Frankie Conner Ritter" });
 
-
-            INameSorterService objNameSorterService = new NameSorterService(namesRepositoryMock.Object);
+            var loggerMock = new Mock<ILoggerService>();
+            INameSorterService objNameSorterService = new NameSorterService(namesRepositoryMock.Object, loggerMock.Object);
             var sortedNames = objNameSorterService.GetSortedNames();
             Assert.AreEqual(sortedNames.Count,11);
             Assert.AreEqual(sortedNames[0], "Marin Alvarez");
@@ -57,7 +57,8 @@ namespace NameSorter.NamesService.Tests
                  });
 
 
-            INameSorterService objNameSorterService = new NameSorterService(namesRepositoryMock.Object);
+            var loggerMock = new Mock<ILoggerService>();
+            INameSorterService objNameSorterService = new NameSorterService(namesRepositoryMock.Object, loggerMock.Object);
             string illegalName;
             var result = objNameSorterService.validateNames(out illegalName);
 
@@ -76,8 +77,8 @@ namespace NameSorter.NamesService.Tests
                 "",
                  });
 
-
-            INameSorterService objNameSorterService = new NameSorterService(namesRepositoryMock.Object);
+            var loggerMock = new Mock<ILoggerService>();
+            INameSorterService objNameSorterService = new NameSorterService(namesRepositoryMock.Object,loggerMock.Object);
             string illegalName;
             var result = objNameSorterService.validateNames(out illegalName);
 
@@ -95,8 +96,8 @@ namespace NameSorter.NamesService.Tests
                 "Janet Parsons jackson brown whittle",
                  });
 
-
-            INameSorterService objNameSorterService = new NameSorterService(namesRepositoryMock.Object);
+            var loggerMock = new Mock<ILoggerService>();
+            INameSorterService objNameSorterService = new NameSorterService(namesRepositoryMock.Object, loggerMock.Object);
             string illegalName;
             var result = objNameSorterService.validateNames(out illegalName);
             Assert.AreEqual(illegalName, "Janet Parsons jackson brown whittle");

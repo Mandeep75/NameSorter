@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Name_Sorter.INamesService
+namespace NameSorter.Interfaces.INameSorterServices
 {
     public class Name
     {

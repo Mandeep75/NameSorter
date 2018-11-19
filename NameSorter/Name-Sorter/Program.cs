@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Name_Sorter.INamesService;
+using INameSorterServices=NameSorter.Interfaces.INameSorterServices;
 using Name_Sorter.IRepository;
-using Name_Sorter.NamesService;
+using namesService = Name_Sorter.NamesService;
 using Name_Sorter.Repository;
 using System;
 using System.Collections.Generic;
@@ -16,34 +15,34 @@ namespace Name_Sorter
     {
         static void Main(string[] args)
         {
-            var serviceProvider = new ServiceCollection()
-            .AddLogging()
+            var serviceProvider = new ServiceCollection()            
             .AddSingleton<INamesRepository, NamesRepository>()
-            .AddSingleton<INameSorterService, NameSorterService>()
+            .AddSingleton<INameSorterServices.INameSorterService, namesService.NameSorterService>()
+            .AddSingleton<INameSorterServices.ILoggerService, namesService.LoggerService>()
             .BuildServiceProvider();
+           
 
-            //configure console logging
-            //serviceProvider
-            //    .GetService<ILoggerFactory>()
-            //    .CreateLogger
+            //var logger = serviceProvider.GetService<ILoggerFactory>()
+            //    .CreateLogger<Program>();
+            //logger.LogDebug("Starting application");
 
-            var logger = serviceProvider.GetService<ILoggerFactory>()
-                .CreateLogger<Program>();
-            logger.LogDebug("Starting application");
-
-            //set repository source and destination..
-
-           var repository= serviceProvider.GetService<INamesRepository>();
+          
 
             IConfiguration config = new ConfigurationBuilder()
                                     .AddJsonFile("appsettings.json", true, true)
                                     .Build();
+            //set repository source and destination..
 
+            var repository = serviceProvider.GetService<INamesRepository>();
             repository.DataSource = config["AppSettings:DataSource"];
             repository.Destination = config["AppSettings:Destination"];
-            
 
-            var bar = serviceProvider.GetService<INameSorterService>();
+            //set Log file location
+
+            var loggerService = serviceProvider.GetService<INameSorterServices.ILoggerService>();
+            loggerService.LogFilePath= config["AppSettings:LogFilePath"];
+
+            var bar = serviceProvider.GetService<INameSorterServices.INameSorterService>();
             Console.WriteLine(string.Format("Main Thread id {0}", Thread.CurrentThread.ManagedThreadId));
             Console.WriteLine("Begining sort.......");
             Console.WriteLine();
@@ -73,7 +72,7 @@ namespace Name_Sorter
             Console.WriteLine("All done!");
         }
 
-        private static async Task<SortResult>   GetSortedNames(INameSorterService bar)
+        private static async Task<SortResult>   GetSortedNames(INameSorterServices.INameSorterService bar)
         {
             var backgroundTask = Task.Run(() =>            
             ValidateandGetSortedNames(bar));
@@ -83,7 +82,7 @@ namespace Name_Sorter
             return sortResult;
         }
 
-        private static SortResult ValidateandGetSortedNames(INameSorterService bar)
+        private static SortResult ValidateandGetSortedNames(INameSorterServices.INameSorterService bar)
         {
             string illegalName;
             var result = new SortResult();

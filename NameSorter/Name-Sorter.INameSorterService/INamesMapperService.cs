@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Name_Sorter.INamesService
+namespace NameSorter.Interfaces.INameSorterServices
 {
-    public interface INamesMapper
+    public interface INamesMapperService
     {
         List<Name> Map(List<string> names);
 

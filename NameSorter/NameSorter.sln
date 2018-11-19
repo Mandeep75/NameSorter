@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.Interfaces.IRepo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.Repository.Tests", "Name-Sorter.Repository.Tests\NameSorter.Repository.Tests.csproj", "{44958C47-9F06-4123-9848-48C6A697A760}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.Interfaces.INameSorterService", "Name-Sorter.INameSorterService\NameSorter.Interfaces.INameSorterService.csproj", "{B8C7D0F6-1645-4C88-A306-EC3BC9397E85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.Interfaces.INameSorterServices", "Name-Sorter.INameSorterService\NameSorter.Interfaces.INameSorterServices.csproj", "{B8C7D0F6-1645-4C88-A306-EC3BC9397E85}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.NameSorterService", "Name-Sorter.NameSorterService\NameSorter.NameSorterService.csproj", "{831894CE-41E3-4B30-9A68-7B0B81C5E11F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.NameSorterServices", "Name-Sorter.NameSorterService\NameSorter.NameSorterServices.csproj", "{831894CE-41E3-4B30-9A68-7B0B81C5E11F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.NameSorterService.Tests", "NameSorter.NameSorterService.Tests\NameSorter.NameSorterService.Tests.csproj", "{664F7656-24DC-44F8-B758-6C6400E9486F}"
 EndProject

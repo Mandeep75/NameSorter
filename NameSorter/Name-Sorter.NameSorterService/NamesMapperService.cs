@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Name_Sorter.INamesService;
+using NameSorter.Interfaces.INameSorterServices;
 
 namespace Name_Sorter.NamesService
 {
     //singleton class....
-    public class NamesMapper : INamesMapper
+    public class NamesMapperService : INamesMapperService
     {
 
-        private static NamesMapper instance = null;
+        private static NamesMapperService instance = null;
 
-        private NamesMapper()
+        private NamesMapperService()
         {
         }
 
-        public static NamesMapper Instance
+        public static NamesMapperService Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new NamesMapper();
+                    instance = new NamesMapperService();
                 }
                 return instance;
             }

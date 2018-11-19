@@ -14,9 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Name-Sorter.INameSorterService\NameSorter.Interfaces.INameSorterService.csproj" />
+    <ProjectReference Include="..\Name-Sorter.INameSorterService\NameSorter.Interfaces.INameSorterServices.csproj" />
     <ProjectReference Include="..\Name-Sorter.IRepository\NameSorter.Interfaces.IRepository.csproj" />
-    <ProjectReference Include="..\Name-Sorter.NameSorterService\NameSorter.NameSorterService.csproj" />
+    <ProjectReference Include="..\Name-Sorter.NameSorterService\NameSorter.NameSorterServices.csproj" />
   </ItemGroup>
 
 </Project>

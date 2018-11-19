@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Name_Sorter.INamesService
+namespace NameSorter.Interfaces.INameSorterServices
 {
     public interface INameSorterService
     {

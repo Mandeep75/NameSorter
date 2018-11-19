@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using Name_Sorter.INamesService;
+using INameSorterServices=NameSorter.Interfaces.INameSorterServices;
 using Name_Sorter.IRepository;
 using System.Linq;
-using System.Threading;
 
 namespace Name_Sorter.NamesService
 {
-    public class NameSorterService : INameSorterService
+    public class NameSorterService : INameSorterServices.INameSorterService
     {
-
+        
         private INamesRepository namesRepository;
-        public NameSorterService(INamesRepository _repository)
+        private INameSorterServices.ILoggerService loggerService;
+        public NameSorterService(INamesRepository _repository, INameSorterServices.ILoggerService _loggerService)
         {
             namesRepository = _repository;
+            loggerService = _loggerService;
         }
              
         public List<string> GetSortedNames()
         {
             var unsortedNames = namesRepository.RetrieveNames();
-            INamesMapper namesMapper = NamesMapper.Instance;
+            INameSorterServices.INamesMapperService namesMapper = NamesMapperService.Instance;
             var names=namesMapper.Map(unsortedNames);
             var sortedNames = names.OrderBy(n => n.LastName).ThenBy(n => n.GivenName_1).
                             ThenBy(n => n.GivenName_2).ThenBy(n => n.GivenName_3).ToList();
@@ -27,6 +28,8 @@ namespace Name_Sorter.NamesService
             var sortedNamestrings = namesMapper.Map(sortedNames);
 
             namesRepository.SaveNames(sortedNamestrings);
+            loggerService.WriteLog(string.Format("{0} Names sorted and successfully written to output file", sortedNames.Count));
+
             //Thread.Sleep(50000);
             return sortedNamestrings;
         }
