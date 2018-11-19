@@ -1,15 +1,15 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using INameSorterServices=NameSorter.Interfaces.INameSorterServices;
-using Name_Sorter.IRepository;
-using namesService = Name_Sorter.NamesService;
-using Name_Sorter.Repository;
+using NameSorter.DataReaderWriter;
+using NameSorter.Interfaces.IDataReaderWriter;
+using NameSorter.Interfaces.ILogger;
+using NameSorter.LoggerService;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using NameSorter.Interfaces.ILogger;
-using NameSorter.LoggerService;
+using INameSorterServices = NameSorter.Interfaces.INameSorterServices;
+using namesService = Name_Sorter.NamesService;
 
 namespace Name_Sorter
 {
@@ -18,24 +18,19 @@ namespace Name_Sorter
         static void Main(string[] args)
         {
             var serviceProvider = new ServiceCollection()            
-            .AddSingleton<INamesRepository, NamesRepository>()
+            .AddSingleton<IDataReaderWriter, DataReaderWriter>()
             .AddSingleton<INameSorterServices.INameSorterService, namesService.NameSorterService>()
             .AddSingleton<ILoggerService, LoggerService>()
-            .BuildServiceProvider();
-           
-
-            //var logger = serviceProvider.GetService<ILoggerFactory>()
-            //    .CreateLogger<Program>();
-            //logger.LogDebug("Starting application");
+            .BuildServiceProvider();          
 
           
 
             IConfiguration config = new ConfigurationBuilder()
                                     .AddJsonFile("appsettings.json", true, true)
                                     .Build();
-            //set repository source and destination..
+            //set repository source and destination(ie the path where output sorted strings will be written)..
 
-            var repository = serviceProvider.GetService<INamesRepository>();
+            var repository = serviceProvider.GetService<IDataReaderWriter>();
             repository.DataSource = config["AppSettings:DataSource"];
             repository.Destination = config["AppSettings:Destination"];
 
@@ -79,17 +74,17 @@ namespace Name_Sorter
             
         }
 
-        private static async Task<SortResult>   GetSortedNames(INameSorterServices.INameSorterService bar,ILoggerService loggerService)
+        private static async Task<SortResult>   GetSortedNames(INameSorterServices.INameSorterService nameSorterService,ILoggerService loggerService)
         {
             var backgroundTask = Task.Run(() =>            
-            ValidateandGetSortedNames(bar,loggerService));
+            ValidateandGetSortedNames(nameSorterService,loggerService));
             //bar.GetSortedNames());
             // do other work
             var sortResult = await backgroundTask;
             return sortResult;
         }
 
-        private static SortResult ValidateandGetSortedNames(INameSorterServices.INameSorterService bar, ILoggerService loggerService)
+        private static SortResult ValidateandGetSortedNames(INameSorterServices.INameSorterService nameSorterService, ILoggerService loggerService)
         {
             var result = new SortResult();
             try
@@ -97,14 +92,14 @@ namespace Name_Sorter
                 string illegalName;
                 
                 Console.WriteLine(string.Format("Running sort Op in Background Thread , id {0}", Thread.CurrentThread.ManagedThreadId));
-                bool isDataValid = bar.validateNames(out illegalName);
+                bool isDataValid = nameSorterService.validateNames(out illegalName);
                 if (!isDataValid)
                 {
                     result.IsUnsortedDataValid = false;
                     result.IllegalName = illegalName;
                     return result;
                 }
-                result.SortedNames = bar.GetSortedNames();
+                result.SortedNames = nameSorterService.GetSortedNames();
                 result.IsUnsortedDataValid = true;
                 return result;
             }

@@ -8,7 +8,6 @@ namespace Name_Sorter.NamesService
     //singleton class....
     public class NamesMapperService : INamesMapperService
     {
-
         private static NamesMapperService instance = null;
 
         private NamesMapperService()

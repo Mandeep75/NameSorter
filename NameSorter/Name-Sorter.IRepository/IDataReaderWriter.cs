@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Name_Sorter.IRepository
+namespace NameSorter.Interfaces.IDataReaderWriter
 {
-    public interface INamesRepository
+    public interface IDataReaderWriter
     {
         string DataSource { get; set; }
 

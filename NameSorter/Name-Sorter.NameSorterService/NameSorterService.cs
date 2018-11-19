@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using INameSorterServices=NameSorter.Interfaces.INameSorterServices;
-using Name_Sorter.IRepository;
+
 using System.Linq;
 using NameSorter.Interfaces.ILogger;
+using NameSorter.Interfaces.IDataReaderWriter;
 
 namespace Name_Sorter.NamesService
 {
     public class NameSorterService : INameSorterServices.INameSorterService
     {
         
-        private INamesRepository namesRepository;
+        private IDataReaderWriter namesRepository;
         private ILoggerService loggerService;
-        public NameSorterService(INamesRepository _repository, ILoggerService _loggerService)
+        public NameSorterService(IDataReaderWriter _repository, ILoggerService _loggerService)
         {
             namesRepository = _repository;
             loggerService = _loggerService;
@@ -30,8 +31,7 @@ namespace Name_Sorter.NamesService
 
             namesRepository.SaveNames(sortedNamestrings);
             loggerService.WriteLog(string.Format("{0} Names sorted and successfully written to output file", sortedNames.Count));
-
-            //Thread.Sleep(50000);
+           
             return sortedNamestrings;
         }
 
@@ -48,11 +48,7 @@ namespace Name_Sorter.NamesService
                     return false;
                 }
             }
-            return true;
-              
-
-
-          
+            return true;          
         }
     }
 }

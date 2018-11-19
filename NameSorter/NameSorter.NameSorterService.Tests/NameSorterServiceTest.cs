@@ -3,8 +3,8 @@ using Moq;
 using NameSorter.Interfaces.INameSorterServices;
 using Name_Sorter.NamesService;
 using System.Collections.Generic;
-using Name_Sorter.IRepository;
 using NameSorter.Interfaces.ILogger;
+using NameSorter.Interfaces.IDataReaderWriter;
 
 namespace NameSorter.NamesService.Tests
 {
@@ -14,7 +14,7 @@ namespace NameSorter.NamesService.Tests
         [TestMethod]
         public void GetSortedNames_ValidListOf11unsortedStrings_ReturnsValidListOf11sortedStrings()
         {
-            var namesRepositoryMock = new Mock<INamesRepository>();
+            var namesRepositoryMock = new Mock<IDataReaderWriter>();
             namesRepositoryMock.Setup(x => x.RetrieveNames())
                 .Returns(new List<string> { "Janet Parsons",
                 "Vaughn Lewis",
@@ -49,7 +49,7 @@ namespace NameSorter.NamesService.Tests
         [TestMethod]
         public void validateNames_ValidListOf2Strings_ReturnsTrue()
         {
-            var namesRepositoryMock = new Mock<INamesRepository>();
+            var namesRepositoryMock = new Mock<IDataReaderWriter>();
             namesRepositoryMock.Setup(x => x.RetrieveNames())
                 .Returns(new List<string> { "Janet",                
                 "Adonis Julius Archer sainsbury",
@@ -70,7 +70,7 @@ namespace NameSorter.NamesService.Tests
         [TestMethod]
         public void validateNames_EmptytringInAListOf2Strings_Returnsfalse()
         {
-            var namesRepositoryMock = new Mock<INamesRepository>();
+            var namesRepositoryMock = new Mock<IDataReaderWriter>();
             namesRepositoryMock.Setup(x => x.RetrieveNames())
                 .Returns(new List<string> { "Janet Parsons",
                 "",
@@ -89,7 +89,7 @@ namespace NameSorter.NamesService.Tests
         [TestMethod]
         public void validateNames_ANameHavingMoreThan3GivenNamesInAListOf2Strings_Returnsfalse()
         {
-            var namesRepositoryMock = new Mock<INamesRepository>();
+            var namesRepositoryMock = new Mock<IDataReaderWriter>();
             namesRepositoryMock.Setup(x => x.RetrieveNames())
                 .Returns(new List<string> { "Janet Parsons",
                 "Janet Parsons jackson brown whittle",

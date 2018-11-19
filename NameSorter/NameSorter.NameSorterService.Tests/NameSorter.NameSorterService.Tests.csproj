@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Name-Sorter.INameSorterService\NameSorter.Interfaces.INameSorterServices.csproj" />
-    <ProjectReference Include="..\Name-Sorter.IRepository\NameSorter.Interfaces.IRepository.csproj" />
+    <ProjectReference Include="..\Name-Sorter.IRepository\NameSorter.Interfaces.IDataReaderWriter.csproj" />
     <ProjectReference Include="..\Name-Sorter.NameSorterService\NameSorter.NameSorterServices.csproj" />
     <ProjectReference Include="..\NameSorter.Interfaces.ILogger\NameSorter.Interfaces.ILogger.csproj" />
   </ItemGroup>

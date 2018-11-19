@@ -1,13 +1,12 @@
-﻿using Name_Sorter.IRepository;
-using System;
+﻿
+using NameSorter.Interfaces.IDataReaderWriter;
+using NameSorter.Interfaces.ILogger;
 using System.Collections.Generic;
 using System.IO;
-using System.Configuration;
-using NameSorter.Interfaces.ILogger;
 
-namespace Name_Sorter.Repository
+namespace NameSorter.DataReaderWriter
 {
-    public class NamesRepository : INamesRepository
+    public class DataReaderWriter : IDataReaderWriter
     {
         public string DataSource { get; set; }
         public string Destination { get; set; }
@@ -15,7 +14,7 @@ namespace Name_Sorter.Repository
         private List<string> mCache;
         private ILoggerService loggerService;
 
-        public NamesRepository(ILoggerService _loggerService)
+        public DataReaderWriter(ILoggerService _loggerService)
         {
             loggerService = _loggerService;
         }

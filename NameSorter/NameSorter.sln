@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter", "Name-Sorter\NameSorter.csproj", "{C2563EB8-2625-4F98-8785-B71E2F5FE0FB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.Interfaces.IRepository", "Name-Sorter.IRepository\NameSorter.Interfaces.IRepository.csproj", "{71837293-013C-4727-917F-9605DF399DD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.Interfaces.IDataReaderWriter", "Name-Sorter.IRepository\NameSorter.Interfaces.IDataReaderWriter.csproj", "{71837293-013C-4727-917F-9605DF399DD0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.Repository.Tests", "Name-Sorter.Repository.Tests\NameSorter.Repository.Tests.csproj", "{44958C47-9F06-4123-9848-48C6A697A760}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.NameSorterServic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.NameSorterService.Tests", "NameSorter.NameSorterService.Tests\NameSorter.NameSorterService.Tests.csproj", "{664F7656-24DC-44F8-B758-6C6400E9486F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.Repository", "Name-Sorter.Repository\NameSorter.Repository.csproj", "{CC7B5B66-4D88-4308-92F6-40A7641465BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NameSorter.DataReaderWriter", "Name-Sorter.Repository\NameSorter.DataReaderWriter.csproj", "{CC7B5B66-4D88-4308-92F6-40A7641465BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{C5823117-FA6D-4EE5-A59C-5276E4DAA09B}"
 EndProject
