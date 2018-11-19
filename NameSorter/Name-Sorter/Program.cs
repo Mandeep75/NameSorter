@@ -40,7 +40,7 @@ namespace Name_Sorter
             loggerService.LogFilePath= config["AppSettings:LogFilePath"];
 
             var bar = serviceProvider.GetService<INameSorterServices.INameSorterService>();
-            Console.WriteLine(string.Format("Main Thread id {0}", Thread.CurrentThread.ManagedThreadId));
+            Console.WriteLine(string.Format("Main Thread . Thread id {0}", Thread.CurrentThread.ManagedThreadId));
             Console.WriteLine("Begining sort.......");
             Console.WriteLine();
 
@@ -48,7 +48,7 @@ namespace Name_Sorter
 
             var result = sortedNames.Result;
             Console.WriteLine();
-            Console.WriteLine(string.Format("Displaying Results in Main Thread id :{0}", Thread.CurrentThread.ManagedThreadId));
+            Console.WriteLine(string.Format("Displaying Results in Main Thread. Thread id :{0}", Thread.CurrentThread.ManagedThreadId));
             Console.WriteLine();
             if (result.ExceptionFromSorting!=null)
             {
@@ -91,7 +91,7 @@ namespace Name_Sorter
             {
                 string illegalName;
                 
-                Console.WriteLine(string.Format("Running sort Op in Background Thread , id {0}", Thread.CurrentThread.ManagedThreadId));
+                Console.WriteLine(string.Format("Running sort Op in Background Thread , Thread Id: {0}", Thread.CurrentThread.ManagedThreadId));
                 bool isDataValid = nameSorterService.validateNames(out illegalName);
                 if (!isDataValid)
                 {

@@ -28,17 +28,14 @@ namespace NameSorter.DataReaderWriter
                 loggerService.WriteLog("Names Retrieved from Cache");
                 return mCache;
             }
-
-            mCache = new List<string>();
-           
+            mCache = new List<string>();          
            
             using (var reader = new StreamReader(DataSource))
             {
                 while (!reader.EndOfStream)
-                {                   
-                   
+                {                  
                         var line = reader.ReadLine();
-                        mCache.Add(line);                  
+                        mCache.Add(line);          
 
 
                 }

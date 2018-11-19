@@ -31,12 +31,9 @@ namespace Name_Sorter.NamesService
             var namesList = new List<Name>();
             foreach (var name in names)
             {
-                var nameparts = name.Split(' ', StringSplitOptions.RemoveEmptyEntries);                
-                if (nameparts.Length < 1)
-                {
-                    //log error
-                    continue;
-                }
+                //This is just  percautionary check, as validator would already had covered this scenario
+                if (name == null || name.Trim() == string.Empty) continue;
+                var nameparts = name.Split(' ', StringSplitOptions.RemoveEmptyEntries);         
 
                 var structuredName = new Name();                
                 structuredName.GivenName_1 = nameparts[0];
@@ -52,16 +49,14 @@ namespace Name_Sorter.NamesService
                     structuredName.GivenName_2 = nameparts[1];
                     structuredName.GivenName_3 = nameparts[2];
                 }
+                //This is just  percautionary check, as validator would already had covered this scenario
                 else if (nameparts.Length > 4)
-                {
-                    //log error
+                {                   
                     continue;
                 }
                 namesList.Add(structuredName);
             }
-
             return namesList;
-
         }
 
 

@@ -29,7 +29,7 @@ namespace Name_Sorter.Repository.Tests
             var loggerMock = new Mock<ILoggerService>();
             var namesRepository = new DataReaderWriter(loggerMock.Object);
 
-            string path = Directory.GetCurrentDirectory();
+           
 
             List<string> names = new List<string>
             {
@@ -39,8 +39,21 @@ namespace Name_Sorter.Repository.Tests
             };
 
 
-             namesRepository.Destination = @".\..\..\..\output\sorted-names-list.txt";
+             namesRepository.Destination = @".\..\..\..\Output";
              namesRepository.SaveNames(names);
+            
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.IO.FileNotFoundException))]
+        public void RetrieveNames_NonExistingFile_ReturnsListofStrings()
+        {
+            var loggerMock = new Mock<ILoggerService>();
+            var namesRepository = new DataReaderWriter(loggerMock.Object);
+
+            string path = Directory.GetCurrentDirectory();
+            namesRepository.DataSource = @".\..\..\..\DataSource\notExisting.txt";
+            var unsortedNames = namesRepository.RetrieveNames();
             
         }
     }

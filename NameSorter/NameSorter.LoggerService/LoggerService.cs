@@ -27,7 +27,7 @@ namespace NameSorter.LoggerService
                 fileStream = new FileStream(logFile, FileMode.Append);
             }
             log = new StreamWriter(fileStream);
-            log.WriteLine(strLog);
+            log.WriteLine(string.Format("[Time:{0}] :{1} ",DateTime.Now, strLog));
             log.Close();
         }
     }
